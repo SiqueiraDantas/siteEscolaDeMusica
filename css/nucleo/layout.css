@@ -1,0 +1,14 @@
+.container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
+.btn{
+  display: inline-block; padding: .65rem 1rem; border-radius: var(--radius-lg);
+  background: var(--cinza-10); border: 1px solid var(--cinza-30);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-card); }
+.btn--primario{ background: var(--laranja); border-color: var(--laranja); color: var(--texto-claro); }
+
+/* Seções espaçamento */
+section{ padding: 48px 0; }
+
+/* Grid simples */
+.grid{ display: grid; gap: var(--gap); }

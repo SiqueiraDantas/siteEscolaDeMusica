@@ -1,0 +1,163 @@
+:root{
+  --mis-azul:#1B4B5F;
+  --mis-laranja:#F26729;
+  --mis-bg:#0f2f3d;
+  --mis-claro:#f7f9fb;
+  --mis-cinza:#e7eef3;
+}
+
+/* ================= HERO ================= */
+.mis-hero{
+  background: linear-gradient(0deg, rgba(0,0,0,.25), rgba(0,0,0,.25)), var(--mis-azul);
+  color: #fff;
+}
+.mis-hero__wrap{
+  max-width: 1100px; margin: 0 auto; padding: 16px 20px 12px;
+}
+.mis-hero h1{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800; letter-spacing:.5px; margin: 0 0 6px;
+}
+.mis-hero p{ opacity: .9; margin:0; }
+
+/* ================= LAYOUT ================= */
+.mis-history{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+}
+
+/* ============ ÍNDICE DE ANOS (LATERAL) ============ */
+.year-index{
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  border-left: 3px solid rgba(27,75,95,.15);
+  padding-left: 16px;
+}
+.year-index ul{
+  list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;
+}
+.year-index a{
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  color: #244b5b;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background .2s,color .2s, transform .2s;
+}
+.year-index a::before{
+  content: "";
+  width: 8px; height: 8px; border-radius: 999px;
+  background: #8fb3c1; display: inline-block;
+}
+.year-index a:hover{ color: var(--mis-azul); background: rgba(31,112,140,.08); transform: translateX(3px); }
+.year-index a.is-active{ color: var(--mis-laranja); }
+.year-index a.is-active::before{ background: var(--mis-laranja); }
+
+/* ================= TIMELINE ================= */
+.timeline{
+  position: relative;
+  padding-left: 36px;                /* mais espaço para o “ponto” e para o ano */
+}
+.timeline::before{
+  content:"";
+  position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px; background: rgba(27,75,95,.25);
+}
+
+/* Heading do ano (texto vem do ::before via data-year) */
+.tl-year{
+  position: relative;
+  margin: 36px 0 12px;
+  line-height: 1;
+  font-size: 0;                      /* evita texto visível caso o <h2> tenha conteúdo */
+}
+
+/* Ano visível – sem largura fixa, sem corte, com fundo branco */
+.tl-year::before{
+  content: attr(data-year);
+  position: absolute;
+  left: -82px;                /* ← afastado 20px a mais para a esquerda */
+  top: 12px;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: #1B4B5F;
+  background: #fff;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+
+
+/* ================= CARD ================= */
+.tl-card::before{
+  content:"";
+  position: absolute; left: -28px; top: 26px; /* ↑ centraliza com o número */
+  width: 12px; height: 12px; border-radius: 999px;
+  border: 2px solid #fff; background: var(--mis-laranja);
+  box-shadow: 0 0 0 3px rgba(242,103,41,.18);
+  z-index: 3;
+}
+
+
+/* Pontinho ligado à linha vertical */
+.tl-card::before{
+  content:"";
+  position: absolute; left: -28px; top: 20px; /* alinha com .timeline::before (8px) + padding */
+  width: 12px; height: 12px; border-radius: 999px;
+  border: 2px solid #fff; background: var(--mis-laranja);
+  box-shadow: 0 0 0 3px rgba(242,103,41,.18);
+  z-index: 3;
+}
+
+.tl-card h3{
+  margin: 0 0 6px;
+  font-weight: 700; color: var(--mis-azul);
+}
+.tl-card p{ margin: 0; color:#2b3b44; line-height: 1.6; }
+.tl-card .badge{
+  display: inline-block; margin-top: 10px;
+  background: rgba(242,103,41,.09);
+  color: var(--mis-laranja);
+  border: 1px solid rgba(242,103,41,.25);
+  padding: 4px 8px; border-radius: 999px; font-weight: 600; font-size: .85rem;
+}
+
+/* Estado visível (via IntersectionObserver) */
+.tl-card.is-visible{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ================= RODAPÉ MINI ================= */
+.mis-footer__bar--mini{
+  border-top: 1px dashed rgba(27,75,95,.25);
+  padding: 16px 20px 40px;
+  color: #3a5c6b; display: flex; gap: 12px; justify-content: center; align-items: center;
+}
+.back-top{
+  text-decoration: none; border: 1px solid rgba(27,75,95,.3);
+  padding: 6px 10px; border-radius: 999px;
+  color: var(--mis-azul); font-weight: 600;
+}
+.back-top:hover{ border-color: var(--mis-laranja); color: var(--mis-laranja); }
+
+/* ================= RESPONSIVO ================= */
+@media (max-width: 980px){
+  .mis-history{ grid-template-columns: 1fr; }
+  .year-index{ position: static; border-left: 0; padding-left: 0; }
+  .year-index ul{ grid-auto-flow: column; overflow-x: auto; padding-bottom: 4px; }
+  .timeline{ padding-left: 28px; }
+  .timeline::before{ left: 6px; }
+  .tl-year::before{ left: -64px; font-size: 20px; }
+  .tl-card::before{ left: -24px; }
+}

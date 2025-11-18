@@ -1,0 +1,203 @@
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff; /* fundo branco */
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  margin-bottom: 0;
+}
+
+.cabecalho__wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+}
+
+/* logo apenas */
+.cabecalho__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.cabecalho__logo img {
+  height: 40px;
+  width: auto;
+}
+
+/* botão hamburguer – sem bolinha laranja */
+.menu__toggle {
+  background: transparent;
+  border: none;
+  color: var(--laranja);
+  font-size: 1.8rem;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin-left: auto;           /* empurra o botão pra direita no mobile */
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.menu__toggle:hover {
+  color: #e85c1e;
+}
+
+/* menu lateral no mobile */
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100vh;
+  width: 75%;
+  max-width: 320px;
+  background: #fff;
+  box-shadow: -2px 0 12px rgba(0,0,0,.1);
+  display: flex;
+  flex-direction: column;
+  padding: 80px 24px 24px;
+  gap: 16px;
+  transition: right .3s ease;
+  z-index: 200;
+}
+
+.menu.ativo {
+  right: 0;
+}
+
+.menu a {
+  color: var(--azul-escuro);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--cinza-30);
+}
+
+.menu a:hover,
+.menu a.ativo {
+  color: var(--laranja);
+}
+
+/* Layout desktop */
+@media (min-width: 900px) {
+  .cabecalho__wrap {
+    gap: 24px;
+  }
+
+  /* ordem: logo | menu | header-actions */
+  .cabecalho__logo {
+    order: 1;
+  }
+
+  .menu {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    order: 2;
+  }
+
+  .menu a {
+    border: none;
+    color: var(--azul-escuro);
+    font-weight: 500;
+  }
+
+  .menu a:hover,
+  .menu a.ativo {
+    color: var(--laranja);
+  }
+
+  .menu__toggle {
+    display: none; /* some no desktop */
+  }
+
+  .cabecalho__wrap .header-actions {
+    order: 3;
+    margin-left: auto; /* joga idiomas/tema/nos apoie pra direita */
+  }
+}
+
+/* reduz o espaço entre o cabeçalho e o banner */
+.hero {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* ===== estilos antigos de topbar (mantidos se usar em outra página) ===== */
+.topbar {
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  border-bottom: 2px solid #eee;
+}
+
+.logo {
+  height: 45px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Bandeiras */
+.idiomas .flag {
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.idiomas .flag:hover {
+  transform: scale(1.1);
+}
+
+/* Botão modo escuro */
+.darkmode-btn {
+  background: #1B4B5F;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .2s;
+}
+
+.darkmode-btn:hover {
+  transform: scale(1.07);
+}
+
+.icon-moon {
+  width: 20px;
+  height: 20px;
+  background: url("assets/icones/moon.svg") no-repeat center;
+}
+
+/* Apoie */
+.apoie-btn {
+  background: #F26729;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.apoie-btn:hover {
+  opacity: .9;
+}

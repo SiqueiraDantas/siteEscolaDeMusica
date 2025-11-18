@@ -1,0 +1,2 @@
+html,body{font-family:var(--fonte-base);background:var(--cor-fundo);color:var(--cor-texto)}
+a{color:var(--cor-secundaria)} a:hover{opacity:.9}

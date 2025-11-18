@@ -1,0 +1,9 @@
+.navbar{background:var(--cor-secundaria);color:#fff}
+.navbar__container{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);padding:var(--sp-2) var(--sp-4)}
+.navbar__brand{display:flex;align-items:center;gap:var(--sp-2);font-weight:700;color:#fff}
+.navbar__logo{width:28px;height:28px;object-fit:contain}
+.navbar__menu{display:none;gap:var(--sp-2);align-items:center}
+.navbar__link{padding:var(--sp-2) var(--sp-3);border-radius:var(--raio);background:transparent;color:#fff}
+.navbar__link:hover{background:rgba(255,255,255,.12)}
+.navbar__toggle{color:#fff;font-size:1.25rem}
+@media(min-width:768px){.navbar__menu{display:flex}.navbar__toggle{display:none}}

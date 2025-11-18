@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escola de Música — Início</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet"/>
+
+  <!-- CSS (NÚCLEO) -->
+  <link rel="stylesheet" href="css/nucleo/reset.css">
+  <link rel="stylesheet" href="css/nucleo/variaveis.css">
+  <link rel="stylesheet" href="css/nucleo/tipografia.css">
+  <link rel="stylesheet" href="css/nucleo/layout.css">
+
+  <!-- CSS (COMPONENTES) -->
+  <link rel="stylesheet" href="css/componentes/cabecalho.css">
+  <link rel="stylesheet" href="css/componentes/menu.css">
+  <link rel="stylesheet" href="css/componentes/cards.css">
+  <link rel="stylesheet" href="css/componentes/rodape.css">
+  <link rel="stylesheet" href="css/componentes/apoiadores.css">
+
+  <!-- CSS (PÁGINA) -->
+  <link rel="stylesheet" href="css/paginas/index.css">
+
+  <!-- Estilos topo (flags, modo escuro, nos apoie) + overrides Dark Mode -->
+  <style>
+    /* ===== TOPO: AÇÕES (logo + idiomas + tema + nos apoie) ===== */
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-left:16px;
+    }
+
+    /* Bandeiras / Idioma */
+    .lang-switch{
+      display:flex;
+      align-items:center;
+      gap:4px;
+    }
+    .lang-switch__btn{
+      appearance:none;
+      border-radius:999px;
+      border:1px solid rgba(27,75,95,.25);
+      background:#fff;
+      color:#1B4B5F;
+      cursor:pointer;
+      padding:3px 7px;
+      font-size:.8rem;
+      line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background .2s,border-color .2s,color .2s,transform .15s;
+    }
+    .lang-switch__btn:hover{
+      transform:translateY(-1px);
+    }
+    .lang-switch__btn.is-active{
+      background:#F26729;
+      border-color:#F26729;
+      color:#fff;
+    }
+
+    /* Botão "Nos apoie" */
+    .support-btn{
+      text-decoration:none;
+      padding:7px 14px;
+      border-radius:999px;
+      background:#F26729;
+      color:#fff;
+      font-weight:700;
+      font-size:.85rem;
+      border:1px solid #F26729;
+      transition:filter .15s, transform .15s, box-shadow .15s;
+      white-space:nowrap;
+    }
+    .support-btn:hover{
+      filter:brightness(1.05);
+      transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(0,0,0,.16);
+    }
+
+    /* Toggle de tema estilizado (sol/lua) */
+    .theme-toggle{
+      position:relative;
+      width:50px;
+      height:26px;
+      border-radius:999px;
+      border:none;
+      padding:0;
+      background:#e7edf3;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:space-between;
+      box-sizing:border-box;
+      transition:background .25s, box-shadow .25s;
+    }
+    .theme-toggle__icon{
+      font-size:13px;
+      width:50%;
+      text-align:center;
+      z-index:1;
+      pointer-events:none;
+    }
+    .theme-toggle__circle{
+      position:absolute;
+      left:2px;
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      background:#fff;
+      box-shadow:0 2px 6px rgba(15,23,42,.35);
+      transition:transform .25s ease;
+    }
+
+    /* Responsivo topo */
+    @media (max-width: 880px){
+      .header-actions{ gap:8px; }
+      .support-btn{ display:none; }  /* se quiser sempre visível, remove esta linha */
+    }
+    @media (max-width: 720px){
+      .lang-switch__btn{ padding:2px 6px; font-size:.75rem; }
+      .theme-toggle{ width:46px; height:24px; }
+      .theme-toggle__circle{ width:20px; height:20px; }
+    }
+
+    /* ============ DARK MODE OVERRIDES ============ */
+    body.dark-mode{
+      background:#0f1820;
+      color:#eaf1f6;
+    }
+
+    body.dark-mode .cabecalho{
+      background:#0f1820;
+      border-bottom:1px solid #273847;
+    }
+    body.dark-mode .menu a{ color:#cfe4ee; }
+    body.dark-mode .menu a.ativo{ color:#F47C3C; }
+
+    body.dark-mode .lang-switch__btn{
+      background:#111827;
+      border-color:#273847;
+      color:#eaf1f6;
+    }
+    body.dark-mode .lang-switch__btn.is-active{
+      background:#F47C3C;
+      border-color:#F47C3C;
+      color:#fff;
+    }
+
+    body.dark-mode .support-btn{
+      background:#F47C3C;
+      border-color:#F47C3C;
+      color:#fff;
+    }
+
+    body.dark-mode .theme-toggle{
+      background:#111827;
+      box-shadow:0 0 0 1px #273847;
+    }
+    body.dark-mode .theme-toggle__circle{
+      transform:translateX(24px);
+    }
+
+    /* Seções */
+    body.dark-mode .home-hero{
+      background:linear-gradient(0deg,rgba(0,0,0,.18),rgba(0,0,0,.18)),#0f2f3d;
+    }
+    body.dark-mode .btn--ghost{
+      border-color:rgba(255,255,255,.4);
+      color:#fff;
+    }
+
+    body.dark-mode .pilares,
+    body.dark-mode .programas,
+    body.dark-mode .agenda,
+    body.dark-mode .noticias{ background:#0f1820; }
+
+    body.dark-mode .pilar,
+    body.dark-mode .programa,
+    body.dark-mode .agenda__list li,
+    body.dark-mode .card--news{
+      background:#16232e;
+      border-color:#273847;
+      color:#eaf1f6;
+    }
+    body.dark-mode .pilar p,
+    body.dark-mode .programa__body p,
+    body.dark-mode .agenda__list small{
+      color:#c7d6df;
+    }
+    body.dark-mode .sec-head h2,
+    body.dark-mode .agenda__cta h3{ color:#cfe4ee; }
+
+    body.dark-mode .chip{
+      background:#2a3b47;
+      color:#eaf1f6;
+      border-color:#31495b;
+    }
+    body.dark-mode .chip--alt{
+      background:#203245;
+      color:#cfe4ee;
+      border-color:#2b4a67;
+    }
+
+    body.dark-mode .btn--primario{
+      background:#F47C3C;
+      color:#fff;
+    }
+
+    body.dark-mode .mis-footer__bar{
+      background:#0f1820;
+      border-top:1px solid #273847;
+    }
+    body.dark-mode .mis-footer__title{ color:#eaf1f6; }
+    body.dark-mode .mis-footer__list a{ color:#cfe4ee; }
+    body.dark-mode .mis-footer__hint a{ color:#9cd1f0; }
+
+    body.dark-mode .apoiadores .apoiadores__faixa{
+      background:#0f1820;
+      border-color:#273847;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="cabecalho">
+    <div class="cabecalho__wrap container">
+      <a class="cabecalho__logo" href="index.html" aria-label="Página inicial">
+        <img src="imagens/logos/logo.png" alt="Logo Escola de Música" />
+      </a>
+
+      <!-- Ações: idiomas + tema + nos apoie (lado esquerdo no mobile) -->
+      <div class="header-actions">
+        <div class="lang-switch" aria-label="Trocar idioma">
+          <button class="lang-switch__btn is-active" type="button" data-lang="pt-BR" title="Português">
+            🇧🇷
+          </button>
+          <button class="lang-switch__btn" type="button" data-lang="en-US" title="English">
+            🇺🇸
+          </button>
+          <button class="lang-switch__btn" type="button" data-lang="es-ES" title="Español">
+            🇪🇸
+          </button>
+        </div>
+
+        <button id="toggle-dark" class="theme-toggle" aria-label="Alternar modo escuro" aria-pressed="false" title="Modo escuro">
+          <span class="theme-toggle__icon">☀️</span>
+          <span class="theme-toggle__icon">🌙</span>
+          <span class="theme-toggle__circle"></span>
+        </button>
+
+        <a href="apoie.html" class="support-btn">
+          Nos apoie
+        </a>
+      </div>
+
+      <!-- Botão hamburguer: vai pra ponta direita -->
+      <button class="menu__toggle" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav class="menu" id="menu">
+        <a href="index.html" class="ativo" aria-current="page">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="workshop.html">Workshop</a>
+        <a href="historia.html">História</a>
+        <a href="inscricoes.html">Inscrições</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO editorial -->
+    <section class="home-hero">
+      <div class="container home-hero__grid">
+        <div class="home-hero__text">
+          <span class="eyebrow">Made In Sertão — Escola de Música</span>
+          <h1>Música que educa, inspira e transforma.</h1>
+          <p>
+            Formação em sopros e percussão, prática de conjunto e apresentações abertas.
+            Um percurso didático contínuo — do primeiro som ao palco.
+          </p>
+
+          <div class="home-hero__cta">
+            <a class="btn btn--primario" href="inscricoes.html">Fazer inscrição</a>
+            <a class="btn btn--ghost" href="cursos.html">Ver cursos</a>
+          </div>
+
+          <ul class="home-hero__kpis" aria-label="Indicadores">
+            <li><strong>100+</strong><span>alunos por semestre</span></li>
+            <li><strong>9</strong><span>oficinas ativas</span></li>
+            <li><strong>250</strong><span>inscrições / ano</span></li>
+          </ul>
+        </div>
+
+        <div class="home-hero__media">
+          <!-- CARROSSEL: substitui a <img> anterior -->
+          <div class="hero-carousel" id="heroCarousel" aria-roledescription="carousel">
+            <button class="carousel-arrow prev" aria-label="Slide anterior" type="button">&lsaquo;</button>
+
+            <div class="carousel-track" role="list">
+              <!-- ajuste os caminhos abaixo para suas imagens -->
+              <img src="imagens/banners/hero-home.jpg" alt="Alunos em prática de conjunto" role="listitem" loading="eager">
+              <img src="imagens/banners/hero-home-2.jpg" alt="Oficina - slide 2" role="listitem" loading="lazy">
+              <img src="imagens/banners/hero-home-3.jpg" alt="Apresentação pública - slide 3" role="listitem" loading="lazy">
+            </div>
+
+            <button class="carousel-arrow next" aria-label="Próximo slide" type="button">&rsaquo;</button>
+
+            <div class="carousel-dots" role="tablist" aria-label="Indicadores do carrossel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILARES (missão/valores) -->
+    <section class="pilares">
+      <div class="container">
+        <header class="sec-head">
+          <h2>Nossos pilares</h2>
+          <p>Excelência pedagógica, cultura local e impacto social.</p>
+        </header>
+
+        <div class="pilares__grid">
+          <article class="pilar">
+            <h3>Formação Progressiva</h3>
+            <p>Trilhas por faixa etária e instrumento, com teoria aplicada e prática de conjunto.</p>
+          </article>
+
+          <article class="pilar">
+            <h3>Identidade Cultural</h3>
+            <p>Repertório e projetos que celebram as Bandas de Concerto e a cultura da região.</p>
+          </article>
+
+          <article class="pilar">
+            <h3>Comunidade & Palco</h3>
+            <p>Apresentações públicas, concertos temáticos e ações solidárias que aproximam pessoas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMAS (cartões editoriais) -->
+    <section class="programas">
+      <div class="container">
+        <header class="sec-head">
+          <h2>Programas</h2>
+          <a class="link" href="cursos.html">Ver todos os cursos →</a>
+        </header>
+
+        <div class="programas__grid">
+          <a class="programa" href="cursos.html">
+            <div class="programa__media">
+              <img src="imagens/cursos/curso-clarinete.jpg" alt="">
+            </div>
+            <div class="programa__body">
+              <h3>Cursos Regulares</h3>
+              <p>Madeiras, metais, percussão e flauta doce. Do básico ao repertório de concerto.</p>
+              <span class="chip">Matrículas abertas</span>
+            </div>
+          </a>
+
+          <a class="programa" href="workshop.html">
+            <div class="programa__media">
+              <img src="imagens/cursos/curso-saxofone.jpg" alt="">
+            </div>
+            <div class="programa__body">
+              <h3>Workshop & Imersões</h3>
+              <p>Convidados, repertórios especiais e módulos intensivos.</p>
+              <span class="chip chip--alt">Novas turmas</span>
+            </div>
+          </a>
+
+          <a class="programa" href="inscricoes.html">
+            <div class="programa__media">
+              <img src="imagens/cursos/pratica-conjunto.jpg" alt="">
+            </div>
+            <div class="programa__body">
+              <h3>Prática de Conjunto</h3>
+              <p>Ensaios guiados e apresentações públicas — experiência de palco real.</p>
+              <span class="chip">Seleção contínua</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA / CHAMADAS -->
+    <section class="agenda">
+      <div class="container agenda__grid">
+        <div class="agenda__cta">
+          <h3>Participe do próximo concerto</h3>
+          <p>Fique por dentro dos ensaios e apresentações da temporada.</p>
+          <div class="agenda__btns">
+            <a class="btn btn--primario" href="inscricoes.html">Quero participar</a>
+            <a class="btn btn--ghost" href="historia.html">Conheça nossa história</a>
+          </div>
+        </div>
+        <ul class="agenda__list" aria-label="Destaques recentes">
+          <li>
+            <span class="agenda__tag">Concerto</span>
+            <strong>Concerto de fim de semestre</strong>
+            <small>Praça Central • Em breve</small>
+          </li>
+          <li>
+            <span class="agenda__tag">Chamadas</span>
+            <strong>Seleção para metais e percussão</strong>
+            <small>Inscrições on-line • Vagas limitadas</small>
+          </li>
+          <li>
+            <span class="agenda__tag">Oficina</span>
+            <strong>Workshop de repertório</strong>
+            <small>Encontro intensivo com convidados</small>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- NOTÍCIAS / BLOG -->
+    <section class="noticias">
+      <div class="container">
+        <header class="sec-head">
+          <h2>Últimas</h2>
+          <a class="link" href="historia.html">Ver linha do tempo →</a>
+        </header>
+
+        <div class="cards cards--news">
+          <article class="card card--news">
+            <img src="imagens/banners/hero-home.jpg" alt="">
+            <div class="card__conteudo">
+              <h4>Concerto na praça</h4>
+              <p>Encontro musical com repertório de bandas de concerto.</p>
+              <a class="btn" href="historia.html#y-2023">Saiba mais</a>
+            </div>
+          </article>
+
+          <article class="card card--news">
+            <img src="imagens/cursos/curso-bateria.jpg" alt="">
+            <div class="card__conteudo">
+              <h4>Novas turmas</h4>
+              <p>Inscrições abertas para madeiras, metais e percussão.</p>
+              <a class="btn" href="inscricoes.html">Inscrever-se</a>
+            </div>
+          </article>
+
+          <article class="card card--news">
+            <img src="imagens/cursos/curso-clarinete.jpg" alt="">
+            <div class="card__conteudo">
+              <h4>Workshop</h4>
+              <p>Imersão de repertório com convidados especiais.</p>
+              <a class="btn" href="workshop.html">Ver detalhes</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- APOIO -->
+    <section class="apoiadores container">
+      <h3 class="titulo-sec">Apoio</h3>
+      <div class="apoiadores__faixa" aria-label="Logos de apoio">
+        <div class="apoiadores__logos" data-static="true">
+          <img src="imagens/logos/apoiadores-logo.png" alt="Apoio" loading="lazy">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="mis-footer" role="contentinfo">
+    <div class="mis-footer__container">
+      <div class="mis-footer__brand">
+        <img src="imagens/logos/logo-branca.png" alt="Made In Sertão — Escola de Música" class="mis-footer__logo" />
+        <ul class="mis-footer__social" aria-label="Redes sociais">
+          <li><a href="https://instagram.com/amm.madeinsertao" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM18 6.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+          </a></li>
+          <li><a href="https://youtube.com/@madeinsertao" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5-6 3.5z"/></svg>
+          </a></li>
+        </ul>
+      </div>
+
+      <div class="mis-footer__cols">
+        <div class="mis-footer__col">
+          <h3 class="mis-footer__title">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm2 0 8 5 8-5H4zm16 2-8 5-8-5v10h16V8z"/></svg>
+            </span>
+            Contato
+          </h3>
+          <ul class="mis-footer__list">
+            <li><strong>Geral:</strong> <a href="mailto:contato@madeinsertao.org">contato@madeinsertao.org</a></li>
+          </ul>
+          <div class="mis-footer__actions">
+            <a class="btn-outline" href="#" target="_blank" rel="noopener">Canal de Ética</a>
+            <a class="btn-outline" href="#" target="_blank" rel="noopener">Código de Conduta</a>
+          </div>
+        </div>
+
+        <div class="mis-footer__col">
+          <h3 class="mis-footer__title">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            </span>
+            Onde estamos
+          </h3>
+          <address class="mis-footer__address">
+            Rua Alfredo Machado, 130B — Bairro São José<br/>
+            Madalena/CE — CEP 63860-000
+          </address>
+          <p class="mis-footer__hint"><a href="https://maps.google.com/?q=Rua+Alfredo+Machado+130B,+Madalena+CE" target="_blank" rel="noopener">Ver no mapa</a></p>
+        </div>
+
+        <div class="mis-footer__col">
+          <h3 class="mis-footer__title">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.6 8 11 4.6-1.4 8-6 8-11V5l-8-3zm0 4.2 6 2.2v4.6c0 3.9-2.6 7.7-6 8.9-3.4-1.2-6-5-6-8.9V8.4l6-2.2zm-3 7.3a3 3 0 1 0 6 0v-1.5a3 3 0 1 0-6 0v-1.5zm2-1.5a1 1 0 1 1 2 0v1.5a1 1 0 1 1-2 0V12z"/></svg>
+            </span>
+            LGPD
+          </h3>
+          <ul class="mis-footer__list">
+            <li><a href="#" target="_blank" rel="noopener">Política de Privacidade</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Termos de Uso</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Aviso de Privacidade Interna</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mis-footer__bar">
+      <p>2025 © Made In Sertão — Escola de Música de Madalena</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script type="module" src="js/componentes/menu.js"></script>
+
+  <!-- Script Dark Mode + Idiomas -->
+  <script>
+    (function(){
+      const body = document.body;
+      const btnTheme = document.getElementById('toggle-dark');
+
+      // tema salvo / preferência do sistema
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        body.classList.add('dark-mode');
+        btnTheme.setAttribute('aria-pressed','true');
+        btnTheme.title = 'Modo claro';
+      }
+
+      btnTheme.addEventListener('click', () => {
+        const isDark = body.classList.toggle('dark-mode');
+        btnTheme.setAttribute('aria-pressed', String(isDark));
+        btnTheme.title = isDark ? 'Modo claro' : 'Modo escuro';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      // ===== Idiomas (visual / atributo lang, futuro i18n) =====
+      const langButtons = document.querySelectorAll('.lang-switch__btn');
+      const root = document.documentElement;
+      const savedLang = localStorage.getItem('lang');
+
+      if (savedLang) {
+        root.lang = savedLang;
+        langButtons.forEach(b => b.classList.toggle('is-active', b.dataset.lang === savedLang));
+      }
+
+      langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const code = btn.dataset.lang;
+          root.lang = code;
+          localStorage.setItem('lang', code);
+          langButtons.forEach(b => b.classList.toggle('is-active', b === btn));
+        });
+      });
+    })();
+  </script>
+
+  <!-- Script do carrossel (vanilla) -->
+  <script>
+  (function(){
+    const carousel = document.getElementById('heroCarousel');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const prevBtn = carousel.querySelector('.carousel-arrow.prev');
+    const nextBtn = carousel.querySelector('.carousel-arrow.next');
+    const dotsWrap = carousel.querySelector('.carousel-dots');
+
+    let current = 0;
+    let slideWidth = 0;
+    let autoplayInterval = null;
+    const AUTOPLAY_MS = 4500;
+
+    // cria dots dinamicamente
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('role','tab');
+      b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      b.dataset.index = i;
+      b.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function updateSizes(){
+      // calcula largura do container visível
+      slideWidth = carousel.clientWidth;
+      slides.forEach(img => img.style.width = `${slideWidth}px`);
+      track.style.width = `${slideWidth * slides.length}px`;
+      moveTo(current, false);
+    }
+
+    function moveTo(index, animate = true){
+      const x = -index * slideWidth;
+      if (!animate) track.style.transition = 'none';
+      else track.style.transition = 'transform 0.6s cubic-bezier(.2,.9,.2,1)`;
+      track.style.transform = `translateX(${x}px)`;
+      dots.forEach((d,i) => d.setAttribute('aria-selected', i === index ? 'true' : 'false'));
+
+    function next(){
+      const nxt = (current + 1) % slides.length;
+      moveTo(nxt);
+    }
+    function prev(){
+      const prev = (current - 1 + slides.length) % slides.length;
+      moveTo(prev);
+    }
+    function goTo(i){ moveTo(i); resetAutoplay(); }
+
+    function startAutoplay(){
+      stopAutoplay();
+      autoplayInterval = setInterval(next, AUTOPLAY_MS);
+    }
+    function stopAutoplay(){ if (autoplayInterval) clearInterval(autoplayInterval); }
+    function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+    nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
+    prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { next(); resetAutoplay(); }
+      if (e.key === 'ArrowLeft') { prev(); resetAutoplay(); }
+    });
+    carousel.tabIndex = 0;
+
+    window.addEventListener('resize', () => updateSizes());
+
+    // init
+    updateSizes();
+    startAutoplay();
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+:root{
+  --laranja: #F26729;     /* Made In Sertão */
+  --azul-escuro: #1B4B5F; /* Made In Sertão */
+  --cinza-10: #FAFAFA;    /* sidebar clara */
+  --cinza-30: #EFE9E9;
+
+  --texto: #1a1a1a;
+  --texto-claro: #ffffff;
+
+  --radius-lg: 16px;
+  --shadow-card: 0 8px 24px rgba(0,0,0,.08);
+
+  --container: 1200px;
+  --gap: 16px;
+}
+body.dark-mode {
+  --cor-fundo: #0f1820;
+  --cor-texto: #f1f1f1;
+  --cor-card: #16232e;
+  --cor-borda: #273847;
+  --cor-secundaria: #1b2a37;
+
+  /* Mantém contraste e acessibilidade */
+  --mis-azul:#C8E1EA;
+  --mis-laranja:#F47C3C;
+}

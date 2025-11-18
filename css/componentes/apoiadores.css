@@ -1,0 +1,50 @@
+/* Contêiner com “janela” de exibição */
+.apoiadores__faixa{
+  position: relative;
+  overflow: hidden;
+  padding: 8px 0 24px;
+  /* fade suave nas bordas (opcional) */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+
+/* Pista que se move (um set duplicado via JS para loop perfeito) */
+.apoiadores__logos{
+  --logos-vel: 28s;            /* ajuste a velocidade (menor = mais rápido) */
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  width: max-content;          /* largura cresce conforme o conteúdo */
+  animation: logos-marquee var(--logos-vel) linear infinite;
+  will-change: transform;
+}
+
+/* Pausa a animação quando o mouse está por cima */
+.apoiadores__faixa:hover .apoiadores__logos{
+  animation-play-state: paused;
+}
+
+/* Tamanho das logos (grande no desktop, responsivo) */
+.apoiadores__logos img{
+  height: 120px !important;    /* desktop */
+  width: auto !important;
+  object-fit: contain;
+  max-width: 100%;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+@media (min-width: 1440px){
+  .apoiadores__logos img{ height: 140px !important; }
+}
+@media (max-width: 991px){
+  .apoiadores__logos img{ height: 100px !important; }
+}
+@media (max-width: 600px){
+  .apoiadores__logos img{ height: 80px !important; }
+}
+
+/* Move a pista para a esquerda até metade do conteúdo (porque duplicamos 1x no JS) */
+@keyframes logos-marquee{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

@@ -1,0 +1,516 @@
+/* ============================
+   Página: Cursos
+   Depende de: variaveis.css, layout.css, tipografia.css, cards.css
+   ============================ */
+
+/* Estrutura geral */
+.cursos { padding-bottom: 24px; }
+.titulo-principal { margin: 0; }
+
+/* ================= HERO REPAGINADO ================= */
+.hero-cursos {
+  background: linear-gradient(180deg, #fff 0%, var(--cinza-10) 100%);
+  padding: 48px 0;
+  border-bottom: 1px solid var(--cinza-30);
+}
+.hero-cursos__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(20px, 4vw, 48px);
+}
+.hero-cursos__texto h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--azul-escuro);
+  line-height: 1.2;
+  margin: 0;
+}
+.hero-cursos__texto h1 span {
+  color: var(--laranja);
+  font-weight: 900;
+}
+.hero-cursos__texto p {
+  margin: 14px 0 22px;
+  font-size: 1.05rem;
+  color: #333;
+  max-width: 520px;
+}
+.hero-cursos__texto .btn {
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+.hero-cursos__imagem img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+/* ================= CHIPS DE FILTRO ================= */
+.filtros {
+  background: #fff;
+  position: sticky;
+  top: 64px; /* acompanha o cabeçalho */
+  z-index: 50;
+  border-bottom: 1px solid var(--cinza-30);
+}
+.filtros__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 0;
+}
+.chip {
+  border: 1px solid var(--cinza-30);
+  background: #fff;
+  padding: .5rem .8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease, border-color .12s ease;
+}
+.chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
+.chip.ativo { background: var(--laranja); border-color: var(--laranja); color: #fff; }
+
+/* ================= LISTA / GRID ================= */
+.cursos__lista { margin: 24px 0; }
+
+.cards.cursos__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(12px, 2vw, 18px);
+}
+
+.cursos__lista .card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+.cursos__lista .card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.card__conteudo { display:flex; flex-direction:column; }
+.card__meta {
+  display:flex; flex-wrap: wrap; gap:8px; margin: 10px 0 12px;
+  font-size: .85rem; color:#555;
+}
+
+/* Badges */
+.badge {
+  display:inline-block;
+  padding: 4px 8px;
+  background: var(--cinza-10);
+  border:1px solid var(--cinza-30);
+  border-radius: 999px;
+  font-size: .75rem;
+}
+.badge--ok  { border-color: #2bb673; color:#1d7a4c; background:#e9f8f1; }
+.badge--off { border-color: #c0392b; color:#8e2a21; background:#fdecea; }
+
+/* Rodapé do card (vagas + botão) */
+.card__rodape {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ================= Paginação (se usar) ================= */
+.paginacao {
+  display:flex; gap:8px; justify-content:center; margin: 8px 0 32px;
+}
+.paginacao button {
+  border:1px solid var(--cinza-30);
+  background:#fff;
+  height:36px; min-width:36px; border-radius:10px;
+  padding:0 10px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.paginacao button:hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
+.paginacao button.ativo { background: var(--laranja); color:#fff; border-color: var(--laranja); }
+
+/* ================= Responsivo ================= */
+@media (max-width: 900px) {
+  .hero-cursos__grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-cursos__texto p { margin-left: auto; margin-right: auto; }
+  .hero-cursos__imagem img { max-width: 90%; margin: 0 auto; }
+}
+/* ===== Compactação da área "Ver cursos" (filtros) ===== */
+.hero-cursos { padding: 36px 0; }                   /* um pouquinho mais enxuto no hero */
+
+.filtros {
+  border-bottom: 1px solid var(--cinza-30);
+}
+
+.filtros__wrap {
+  padding: 4px 0;        /* antes 12px; fica bem mais baixo */
+  gap: 6px;              /* antes 8px */
+}
+
+.chip {
+  padding: .38rem .66rem;  /* antes .5rem .8rem */
+  font-size: .9rem;        /* ligeiramente menor */
+  border-radius: 999px;
+}
+
+.cursos__lista {
+  margin: 10px 0 24px;   /* aproxima os cards dos chips */
+}
+
+/* Telas pequenas: ainda mais compacto */
+@media (max-width: 520px) {
+  .filtros__wrap { padding: 2px 0; gap: 4px; }
+  .chip { padding: .34rem .6rem; font-size: .88rem; }
+}
+/* ====== COMPACTAÇÃO FINAL DOS FILTROS ====== */
+.filtros {
+  background: #fff;
+  border-bottom: 1px solid var(--cinza-30);
+  padding: 4px 0;        /* Reduzido (antes era 12px ou mais) */
+}
+
+.filtros__wrap {
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  gap: 6px;
+}
+
+.chip {
+  padding: .3rem .7rem;   /* Menores e mais leves */
+  font-size: .88rem;
+  border-radius: 999px;
+}
+
+.cursos__lista {
+  margin-top: 8px;       /* Aproxima os cards */
+}
+
+/* Versão mobile ainda mais enxuta */
+@media (max-width: 600px) {
+  .filtros {
+    padding: 2px 0;
+  }
+  .chip {
+    padding: .28rem .6rem;
+    font-size: .84rem;
+  }
+}
+/* Reduz espaço entre lista de cursos e rodapé */
+.cursos__lista {
+  margin-bottom: -10px !important;
+}
+
+.rodape {
+  margin-top: -10px !important;
+}
+/* =========================
+   Ajustes página Cursos
+   Remove faixa branca e ajusta cores
+   Colar no final de css/paginas/cursos.css
+   ========================= */
+
+/* 1) Remover/escurecer a faixa branca entre hero e lista */
+.filtros,
+.filtros__wrap {
+  background: transparent;     /* tira branco */
+  border: 0;
+  padding: 12px 0;
+}
+
+/* Se existir uma barra branca por causa do container pai, força fundo igual ao hero */
+.hero-cursos + .cursos,
+.filtros {
+  background: transparent;
+}
+
+/* 2) Aparência dos chips (filtros) em dark e light */
+.chip {
+  background: rgba(255,255,255,0.04);
+  color: #cfe4ee;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.chip.ativo,
+.chip[aria-selected="true"] {
+  background: var(--mis-laranja);
+  color: #fff;
+  border-color: var(--mis-laranja);
+  box-shadow: 0 6px 18px rgba(242,103,41,0.14);
+}
+
+/* 3) Forçar o fundo do bloco de cursos para herdar o dark (evita branco isolado) */
+main.container.cursos {
+  background: transparent;
+  color: #cfe4ee;
+  padding-top: 18px;
+}
+
+/* 4) Ajustes nos cards para legibilidade no escuro */
+.cards.cursos__lista {
+  background: transparent;
+  padding-top: 8px;
+}
+
+/* Card - bordas e fundo suaves para dark */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #cfe4ee;
+}
+
+/* Textos dentro do card */
+.card .card__conteudo h4 {
+  color: #eaf1f6;
+  margin-bottom: 6px;
+}
+.card .card__conteudo p {
+  color: #c7d6df;
+  opacity: 0.9;
+}
+
+/* Badge e botões do card */
+.card .badge {
+  background: rgba(255,255,255,0.03);
+  color: #cfe4ee;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.card .btn--primario {
+  background: var(--mis-laranja);
+  color: #fff;
+  border-color: var(--mis-laranja);
+}
+
+/* 5) Garantir contraste para o texto do bloco hero-cursos__texto quando o fundo for escuro */
+.hero-cursos__texto h1,
+.hero-cursos__texto p,
+.hero-cursos__texto .btn {
+  color: #eaf1f6;
+}
+.hero-cursos__texto h1 span { color: var(--mis-laranja); }
+
+/* 6) Comportamento no modo claro — preserva seu estilo original */
+body:not(.dark-mode) .filtros,
+body:not(.dark-mode) .filtros__wrap {
+  background: transparent; /* ou coloque a cor que quiser no modo claro */
+}
+body:not(.dark-mode) .chip {
+  background: #fff;
+  color: var(--mis-azul);
+  border: 1px solid rgba(27,75,95,.08);
+}
+body:not(.dark-mode) .card {
+  background: #fff;
+  color: #21343a;
+  border: 1px solid #e8eef2;
+}
+/* ---------------------------------------------
+   ⚡ MODO CLARO – RESTAURA O ORIGINAL BONITO
+------------------------------------------------ */
+body {
+  background: #ffffff;
+}
+
+main.container.cursos {
+  background: #ffffff;
+  color: #21343a;
+}
+
+.filtros,
+.filtros__wrap {
+  background: #fff;
+}
+
+.chip {
+  background: #fff;
+  color: #21343a;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.chip.ativo,
+.chip[aria-selected="true"] {
+  background: var(--mis-laranja);
+  border-color: var(--mis-laranja);
+  color: #fff;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  color: #21343a;
+}
+
+.card .card__conteudo h4 {
+  color: #21343a;
+}
+
+.card .card__conteudo p {
+  color: #444;
+  opacity: 0.9;
+}
+
+.badge {
+  background: #f6f6f6;
+  color: #21343a;
+  border: 1px solid #e0e0e0;
+}
+
+/* Botão do card (modo claro normal) */
+.card .btn--primario {
+  background: var(--mis-laranja);
+  color: #fff;
+  border-color: var(--mis-laranja);
+}
+
+/* Hero */
+.hero-cursos__texto h1,
+.hero-cursos__texto p {
+  color: #21343a;
+}
+
+/* ---------------------------------------------
+   🌙 MODO ESCURO — TUDO AQUI DENTRO
+------------------------------------------------ */
+body.dark-mode {
+  background: #0d1b22 !important;
+  color: #cfe4ee !important;
+}
+
+.dark-mode main.container.cursos {
+  background: transparent !important;
+  color: #cfe4ee;
+}
+
+.dark-mode .hero-cursos__texto h1,
+.dark-mode .hero-cursos__texto p {
+  color: #eaf1f6;
+}
+
+.dark-mode .filtros,
+.dark-mode .filtros__wrap {
+  background: transparent !important;
+  border: 0;
+}
+
+.dark-mode .chip {
+  background: rgba(255,255,255,0.04);
+  color: #cfe4ee;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.dark-mode .chip.ativo,
+.dark-mode .chip[aria-selected="true"] {
+  background: var(--mis-laranja);
+  border-color: var(--mis-laranja);
+  color: #fff;
+}
+
+.dark-mode .card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #cfe4ee;
+}
+
+.dark-mode .card .card__conteudo h4 {
+  color: #eaf1f6;
+}
+
+.dark-mode .card .card__conteudo p {
+  color: #c7d6df;
+}
+
+.dark-mode .badge {
+  background: rgba(255,255,255,0.05);
+  color: #cfe4ee;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.dark-mode .card .btn--primario {
+  background: var(--mis-laranja);
+  border-color: var(--mis-laranja);
+  color: #fff;
+}
+/* ===== Filtros de cursos: manter em uma linha ===== */
+.filtros__wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;           /* impede quebrar linha */
+  overflow-x: auto;            /* se não couber, rola horizontal */
+  -webkit-overflow-scrolling: touch;
+}
+
+.filtros__wrap::-webkit-scrollbar{
+  display: none;               /* esconde barra de rolagem no mobile */
+}
+
+/* cada chip fica "grudado" na linha, sem quebrar */
+.chip{
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Ajuste extra pra telas bem pequenas */
+@media (max-width: 480px){
+  .chip{
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* ===== Filtros centralizados em linha (cursos) ===== */
+.filtros__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;        /* sempre na mesma linha */
+  margin: 0 auto;
+  padding: 6px 0 2px;
+  max-width: 260px;         /* garante que caiba na tela */
+  transform: translateY(8px); /* desce um pouco pra não cortar */
+}
+
+.filtros__wrap .chip{
+  flex-shrink: 0;           /* não deixa esmagar */
+  white-space: nowrap;
+  padding: 4px 10px;        /* menorzinho */
+  font-size: 0.8rem;
+}
+
+/* Ajuste fino pra telas bem pequenas */
+@media (max-width: 480px){
+  .filtros__wrap{
+    max-width: 240px;
+    gap: 6px;
+    transform: translateY(10px);
+  }
+
+  .filtros__wrap .chip{
+    padding: 3px 9px;
+    font-size: 0.78rem;
+  }
+}
+
+/* Ajuste fino para telas pequenas */
+@media (max-width: 480px){
+  .chip{
+    padding: 6px 14px;
+    font-size: .85rem;
+  }
+}

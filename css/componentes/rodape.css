@@ -1,0 +1,218 @@
+/* ====== RODAPÉ MIS (ATUALIZADO - suportando dark mode) ====== */
+
+/* Variáveis principais (tema claro por padrão) */
+:root{
+  /* cores base (compatíveis com seu design atual) */
+  --mis-azul: #1B4B5F;
+  --mis-laranja: #F26729;
+  --mis-branco: #FFFFFF;
+  --mis-branco-80: rgba(255,255,255,.8);
+
+  /* Variáveis específicas do rodapé (usadas no override) */
+  --footer-bg: var(--mis-azul);           /* fundo do bloco do rodapé (claro) */
+  --footer-text: var(--mis-branco-80);    /* texto principal no rodapé */
+  --footer-logos-bg: #ffffff;             /* faixa de apoiadores (clara) */
+  --footer-divider: rgba(255,255,255,.12);
+  --footer-muted: rgba(255,255,255,.72);
+  --footer-social-bg: var(--mis-branco);
+  --footer-social-icon: var(--mis-azul);
+}
+
+/* Dark mode: sobrescreve variáveis para manter contraste */
+body.dark-mode {
+  --footer-bg: #0f2a33;          /* azul petróleo escuro */
+  --footer-text: #eaf1f6;        /* texto claro */
+  --footer-logos-bg: transparent;/* integrará com o fundo escuro, sem ser branco */
+  --footer-divider: rgba(255,255,255,.06);
+  --footer-muted: rgba(234,241,246,.8);
+  --footer-social-bg: rgba(255,255,255,.06); /* círculos mais discretos */
+  --footer-social-icon: #eaf1f6;
+}
+
+/* ========================= estilos ========================= */
+/* O rodapé agora ocupa toda a largura */
+.mis-footer {
+  background: var(--footer-bg); /* cor aplicada aqui */
+  color: var(--footer-text);
+}
+
+/* Agora o container não tem fundo */
+.mis-footer__container {
+  background: transparent;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 20px 28px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+}
+
+/* brand / logo / social */
+.mis-footer__brand{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.mis-footer__logo{
+  height: 54px;
+  width: auto;
+  object-fit: contain;
+  filter: none;
+}
+
+/* redes sociais - os círculos ajustam cor via variável para dark/light */
+.mis-footer__social{
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.mis-footer__social a{
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--footer-social-bg);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.mis-footer__social a:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  background: var(--mis-laranja);
+  border-color: rgba(0,0,0,.12);
+}
+.mis-footer__social svg{
+  width: 20px;
+  height: 20px;
+  fill: var(--footer-social-icon);
+}
+.mis-footer__social a:hover svg{ fill: var(--mis-branco); }
+
+/* colunas do rodapé */
+.mis-footer__cols{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* títulos */
+.mis-footer__title{
+  color: var(--mis-branco);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mis-footer__title .icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+}
+.mis-footer__title .icon svg{
+  width: 16px;
+  height: 16px;
+  fill: var(--mis-branco);
+  opacity: .9;
+}
+
+/* listas / textos */
+.mis-footer__list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-weight: 300;
+  color: var(--footer-text);
+}
+.mis-footer__list a{ color: var(--mis-branco); text-decoration: none; }
+.mis-footer__list a:hover{ color: var(--mis-laranja); }
+
+.mis-footer__address{
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--footer-muted);
+}
+.mis-footer__hint a{
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--mis-laranja);
+  color: var(--mis-branco);
+}
+
+/* actions / botões */
+.mis-footer__actions{
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.btn-outline{
+  border: 1px solid rgba(255,255,255,.18);
+  color: var(--mis-branco);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: .9rem;
+  background: transparent;
+  transition: border-color .2s, color .2s, background .2s, transform .2s;
+}
+.btn-outline:hover{
+  border-color: var(--mis-laranja);
+  background: var(--mis-laranja);
+  color: var(--mis-branco);
+  transform: translateY(-2px);
+}
+
+/* barra inferior */
+.mis-footer__bar{
+  border-top: 1px dashed var(--footer-divider);
+  margin-top: 24px;
+  padding: 16px 20px 24px;
+  text-align: center;
+  font-size: .9rem;
+  color: var(--footer-text);
+  background: transparent;
+}
+
+/* faixa de apoiadores (logos) - agora respeita var --footer-logos-bg */
+.apoiadores__faixa{
+  background: var(--footer-logos-bg);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--footer-divider);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* conteúdo das logos dentro da faixa */
+.apoiadores__logos img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* responsivo */
+@media (max-width: 960px){
+  .mis-footer__container{ grid-template-columns: 1fr; }
+  .mis-footer__brand{ align-items: center; text-align: center; }
+  .mis-footer__cols{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px){
+  .mis-footer__cols{ grid-template-columns: 1fr; }
+  .mis-footer__bar{ font-size: .85rem; }
+  .mis-footer__social a{ width: 38px; height: 38px; }
+}

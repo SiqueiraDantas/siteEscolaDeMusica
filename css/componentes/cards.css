@@ -1,0 +1,13 @@
+.destaques .cards{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap);
+}
+.card{
+  background:#fff; border:1px solid var(--cinza-30); border-radius: var(--radius-lg); overflow:hidden;
+  box-shadow: var(--shadow-card);
+}
+.card__conteudo{ padding: 14px; display:grid; gap:10px; }
+.card h4{ font-size: 1.05rem; font-weight: 800; color: var(--azul-escuro); }
+
+@media (max-width: 920px){
+  .destaques .cards{ grid-template-columns: 1fr; }
+}

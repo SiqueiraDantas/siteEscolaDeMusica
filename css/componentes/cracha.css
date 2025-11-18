@@ -1,0 +1,21 @@
+.cracha {
+  border: 1px dashed var(--cor-borda);
+  border-radius: var(--raio-lg);
+  padding: var(--sp-4);
+  background: #fff;
+  max-width: 420px;
+}
+.cracha__titulo { font-weight: 700; margin-bottom: var(--sp-2); }
+.cracha__qr {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  background: #0e2a36;
+  color: #fff;
+  border-radius: var(--raio);
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media print {
+  .navbar, .btn { display: none !important; }
+  .cracha { border: 0; }
+}
