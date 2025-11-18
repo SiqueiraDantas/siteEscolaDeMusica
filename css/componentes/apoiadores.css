@@ -1,50 +1,60 @@
-/* Contêiner com “janela” de exibição */
-.apoiadores__faixa{
-  position: relative;
-  overflow: hidden;
-  padding: 8px 0 24px;
-  /* fade suave nas bordas (opcional) */
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+/* ===== APOIADORES – fixo, centralizado e responsivo ===== */
+
+.apoiadores {
+  padding: 40px 0 48px;
 }
 
-/* Pista que se move (um set duplicado via JS para loop perfeito) */
-.apoiadores__logos{
-  --logos-vel: 28s;            /* ajuste a velocidade (menor = mais rápido) */
+.apoiadores .titulo-sec {
+  margin-bottom: 20px;
+  color: var(--mis-azul);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* faixa onde a imagem fica */
+.apoiadores__faixa {
+  width: 100%;
+  padding: 16px 0;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 48px;
-  width: max-content;          /* largura cresce conforme o conteúdo */
-  animation: logos-marquee var(--logos-vel) linear infinite;
-  will-change: transform;
+  overflow: visible;              /* não cortar nada */
 }
 
-/* Pausa a animação quando o mouse está por cima */
-.apoiadores__faixa:hover .apoiadores__logos{
-  animation-play-state: paused;
+/* wrapper da imagem */
+.apoiadores__logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Tamanho das logos (grande no desktop, responsivo) */
-.apoiadores__logos img{
-  height: 120px !important;    /* desktop */
-  width: auto !important;
-  object-fit: contain;
-  max-width: 100%;
-  image-rendering: -webkit-optimize-contrast;
+/* ---------- DESKTOP / NOTEBOOK ---------- */
+@media (min-width: 769px){
+  .apoiadores__logos img{
+    max-width: none !important;
+    width: auto !important;
+    height: 90px !important;      /* AQUI vc aumenta/diminui no PC */
+    display: block;
+  }
 }
 
-@media (min-width: 1440px){
-  .apoiadores__logos img{ height: 140px !important; }
-}
-@media (max-width: 991px){
-  .apoiadores__logos img{ height: 100px !important; }
-}
-@media (max-width: 600px){
-  .apoiadores__logos img{ height: 80px !important; }
+/* ---------- CELULAR / TABLET ---------- */
+@media (max-width: 768px){
+  .apoiadores__logos img{
+    width: 100% !important;       /* ocupa toda a largura */
+    max-width: 520px;             /* não exagerar em telas medias */
+    height: auto !important;      /* ajusta a altura sozinho */
+    display: block;
+    margin: 0 auto;
+  }
 }
 
-/* Move a pista para a esquerda até metade do conteúdo (porque duplicamos 1x no JS) */
-@keyframes logos-marquee{
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* Dark mode só garante que nada escureça a imagem */
+body.dark-mode .apoiadores__faixa {
+  background: transparent;
+  border-color: transparent;
+}
+body.dark-mode .apoiadores__logos img{
+  filter: none;
+  opacity: 1;
 }
