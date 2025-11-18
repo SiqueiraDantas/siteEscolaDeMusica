@@ -1,242 +1,419 @@
+/* ================== BASE ================== */
 :root{
   --mis-azul:#1B4B5F;
   --mis-laranja:#F26729;
   --mis-cinza:#e7eef3;
+  --mis-bg:#0f2f3d;
 }
 
-/* Botão aproveitando padrão do index */
-.btn{
-  padding: 10px 16px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 700;
-  border: 1px solid transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-.btn--primario{
-  background: var(--mis-laranja);
-  color:#fff;
-}
-.btn--ghost{
-  background: transparent;
-  color: var(--mis-azul);
-  border-color: rgba(27,75,95,.25);
-}
-.btn:hover{ opacity:.96; }
-
-/* ===== HERO APOIE ===== */
-
+/* ================== HERO ================== */
+/* Modo claro */
 .apoie-hero{
   background: linear-gradient(135deg,#f6f8fb 0%,#e3edf7 60%,#d6e3f0 100%);
-  padding: 40px 0 32px;
-}
-.apoie-hero__grid{
-  display: grid;
-  grid-template-columns: minmax(0,1.25fr) minmax(0,0.9fr);
-  gap: 32px;
-  align-items: center;
-}
-.apoie-hero__eyebrow{
-  display:inline-block;
-  background: rgba(255,255,255,.9);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size:.8rem;
-  margin-bottom:8px;
   color: var(--mis-azul);
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0 48px;
 }
+
+.apoie-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 14px),
+    radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 20%);
+  mix-blend-mode:overlay;
+  opacity:.95;
+  z-index:0;
+}
+
+.apoie-hero__grid{
+  display:grid;
+  grid-template-columns: 1.25fr .9fr;
+  gap:32px;
+  align-items:center;
+  position:relative;
+  z-index:2;
+}
+
+.apoie-hero .tag{
+  display:inline-block;
+  background:rgba(255,255,255,.9);
+  color:var(--mis-azul);
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
 .apoie-hero h1{
   margin:0 0 10px;
-  color: var(--mis-azul);
+  font-size:2.4rem;
+  line-height:1.1;
   font-weight:800;
 }
-.apoie-hero__subtitle{
-  margin:0 0 16px;
-  color:#264454;
+
+.apoie-hero p{
+  margin:0 0 18px;
+  font-size:1.05rem;
+  opacity:.9;
+  max-width:620px;
 }
-.apoie-hero__cta{
+
+/* Botões do hero */
+.apoie-btns{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:18px;
+  gap:12px;
+  margin:24px 0 26px;
 }
-.apoie-hero__highlights{
+
+.apoie-btn{
+  padding:12px 20px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid transparent;
+  font-size:.98rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.apoie-btn--primario{
+  background:var(--mis-laranja);
+  color:#fff;
+}
+
+.apoie-btn--ghost{
+  background:#ffffff;
+  color:var(--mis-azul);
+  border:1px solid rgba(0,0,0,.16);
+}
+
+/* Métricas */
+.apoie-metricas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:28px;
+  margin-top:10px;
+}
+
+.apoie-metricas__item strong{
+  display:block;
+  font-size:1.4rem;
+  font-weight:800;
+}
+
+.apoie-metricas__item span{
+  font-size:.95rem;
+  opacity:.8;
+}
+
+/* Box à direita – “Para onde vai o seu apoio?” */
+.apoie-box{
+  background:#ffffff;
+  color:var(--mis-azul);
+  border-radius:18px;
+  padding:26px 28px;
+  border:1px solid #d7e2eb;
+  box-shadow:0 14px 40px rgba(15,47,61,.18);
+}
+
+.apoie-box h3{
+  margin:0 0 12px;
+  font-size:1.4rem;
+  font-weight:800;
+}
+
+.apoie-box ul{
   list-style:none;
   padding:0;
   margin:0;
-  display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-}
-.apoie-hero__highlights li{
-  display:grid;
-  gap:2px;
-  color:#264454;
-}
-.apoie-hero__highlights strong{
-  font-size:1.3rem;
-  color:var(--mis-azul);
 }
 
-/* bloco lateral */
-.apoie-hero__side{
-  display:flex;
-  justify-content:flex-end;
-}
-.apoie-bloco{
-  background:#fff;
-  border-radius:16px;
-  padding:18px 18px 16px;
-  border:1px solid #dbe4ee;
-  box-shadow:0 10px 28px rgba(15,23,42,.08);
-  max-width:380px;
-}
-.apoie-bloco h2{
-  margin:0 0 10px;
-  color:var(--mis-azul);
-}
-.apoie-bloco ul{
-  margin:0;
-  padding-left:20px;
-  color:#264454;
+.apoie-box li{
+  margin-bottom:8px;
+  font-size:.98rem;
+  opacity:.9;
 }
 
-/* ===== SEÇÕES GERAIS ===== */
-
-.apoie-section{
-  padding:32px 0;
+/* =========== HERO – MODO ESCURO =========== */
+body.dark-mode .apoie-hero{
+  background: linear-gradient(135deg,#0f4a50 0%,#083f44 60%,#051e24 100%);
+  color:#eaf1f6;
 }
-.apoie-section--alt{
+
+body.dark-mode .apoie-hero::before{
+  opacity:.35;
+}
+
+body.dark-mode .apoie-hero .tag{
+  background:rgba(0,0,0,.35);
+  color:#eaf1f6;
+}
+
+body.dark-mode .apoie-hero h1{
+  color:#ffffff;
+}
+
+body.dark-mode .apoie-hero p{
+  color:#d0e4ed;
+}
+
+/* Botões no dark */
+body.dark-mode .apoie-btn--primario{
+  background:var(--mis-laranja);
+  color:#fff;
+}
+
+body.dark-mode .apoie-btn--ghost{
+  background:transparent;
+  color:#ffffff;
+  border-color:rgba(255,255,255,.55);
+}
+
+/* Box no dark */
+body.dark-mode .apoie-box{
+  background:#07171f;
+  color:#f3fbff;
+  border-color:#243945;
+  box-shadow:0 16px 50px rgba(0,0,0,.7);
+}
+
+body.dark-mode .apoie-box li{
+  opacity:.95;
+}
+
+/* =========================================
+   FORMAS DE APOIO
+========================================= */
+.apoie-formas{
   background:#f8fafc;
+  padding:56px 0;
 }
 
-.apoie-section__head{
-  margin-bottom:18px;
+body.dark-mode .apoie-formas{
+  background:#101821;
 }
-.apoie-section__head h2{
+
+.apoie-formas__head{
+  margin-bottom:22px;
+}
+
+.apoie-formas__head h2{
+  margin:0 0 8px;
+  font-size:1.8rem;
+  font-weight:800;
+  color:var(--mis-azul);
+}
+
+.apoie-formas__head p{
+  margin:0;
+  opacity:.8;
+  max-width:620px;
+}
+
+body.dark-mode .apoie-formas__head h2{
+  color:#eaf4ff;
+}
+body.dark-mode .apoie-formas__head p{
+  color:#c9dbe5;
+}
+
+.formas-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.forma-item{
+  background:#ffffff;
+  border-radius:14px;
+  padding:20px 18px;
+  border:1px solid #e3ecf2;
+}
+
+.forma-item h3{
   margin:0 0 6px;
+  font-size:1.05rem;
+  font-weight:700;
   color:var(--mis-azul);
 }
-.apoie-section__head p{
+
+.forma-item p{
   margin:0;
-  color:#324454;
+  font-size:.97rem;
+  opacity:.85;
 }
 
-/* ===== CARDS FORMAS DE APOIO ===== */
+body.dark-mode .forma-item{
+  background:#15232d;
+  border-color:#243543;
+}
 
-.apoie-cards{
+body.dark-mode .forma-item h3{
+  color:#eaf4ff;
+}
+body.dark-mode .forma-item p{
+  color:#c7d7e1;
+}
+
+/* =========================================
+   POR QUE APOIAR?
+========================================= */
+.apoie-porque{
+  background:#ffffff;
+  padding:56px 0 48px;
+}
+
+body.dark-mode .apoie-porque{
+  background:#0d151a;
+}
+
+.apoie-porque__grid{
   display:grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap:18px;
+  grid-template-columns: 1.1fr 1fr;
+  gap:32px;
 }
-.apoie-card{
-  background:#fff;
-  border-radius:16px;
-  padding:18px 16px;
-  border:1px solid #e1e8f0;
-  box-shadow:0 4px 16px rgba(15,23,42,.04);
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.apoie-card h3{
-  margin:0;
+
+.apoie-porque h2{
+  margin:0 0 10px;
+  font-size:1.8rem;
+  font-weight:800;
   color:var(--mis-azul);
 }
-.apoie-card p{
-  margin:0;
-  color:#324454;
-}
-.apoie-card__info{
-  margin-top:4px;
-  font-size:.92rem;
-  color:#324454;
-}
-.apoie-card__info span{
-  font-family:monospace;
+
+.apoie-porque p{
+  margin:0 0 10px;
+  font-size:1.02rem;
+  opacity:.85;
+  max-width:680px;
 }
 
-/* lista de benefícios */
-.apoie-beneficios{
-  margin:4px 0 0;
-  padding-left:18px;
-  color:#324454;
-}
-.apoie-beneficios--list{
+.apoie-porque ul{
+  list-style:none;
+  padding:0;
   margin:0;
 }
 
-/* grid da seção Por que apoiar */
-.apoie-beneficios__grid{
-  display:grid;
-  grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
-  gap:24px;
+.apoie-porque li{
+  margin-bottom:8px;
+  font-size:.98rem;
+  opacity:.9;
 }
 
-/* ===== CONTATO ===== */
+body.dark-mode .apoie-porque h2{
+  color:#eaf4ff;
+}
+body.dark-mode .apoie-porque p{
+  color:#c7d9e3;
+}
+body.dark-mode .apoie-porque li{
+  color:#d4e3ee;
+}
 
+/* =========================================
+   CONTATO / CTA FINAL
+========================================= */
 .apoie-contato{
-  background:#fff;
+  padding:56px 0 70px;
 }
-.apoie-contato__card{
-  background:#fff;
-  border-radius:18px;
-  padding:22px 20px;
-  border:1px solid #dbe4ee;
-  box-shadow:0 8px 24px rgba(15,23,42,.06);
+
+.contato-box{
   max-width:720px;
   margin:0 auto;
-  text-align:left;
+  background:#ffffff;
+  border-radius:18px;
+  border:1px solid #e3ecf2;
+  padding:30px 28px 28px;
+  text-align:center;
 }
-.apoie-contato__card h2{
+
+.contato-box h3{
   margin:0 0 10px;
+  font-size:1.7rem;
+  font-weight:800;
   color:var(--mis-azul);
 }
-.apoie-contato__card p{
-  margin:0 0 16px;
-  color:#324454;
-}
-.apoie-contato__acoes{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+
+.contato-box p{
+  margin:0 0 20px;
+  font-size:1.02rem;
+  color:#2b3b44;
+  opacity:.9;
 }
 
-/* ===== RESPONSIVO ===== */
+.apoie-btn-contato{
+  display:inline-block;
+  padding:13px 22px;
+  border-radius:12px;
+  background:var(--mis-laranja);
+  color:#ffffff;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid var(--mis-laranja);
+}
 
-@media (max-width: 980px){
+/* Dark mode */
+body.dark-mode .contato-box{
+  background:#111c24;
+  border-color:#243543;
+}
+body.dark-mode .contato-box h3{
+  color:#eaf4ff;
+}
+body.dark-mode .contato-box p{
+  color:#c7d9e3;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+@media (max-width:1080px){
   .apoie-hero__grid{
     grid-template-columns:1fr;
   }
-  .apoie-hero__side{
-    justify-content:flex-start;
+}
+
+@media (max-width:900px){
+  .formas-grid{
+    grid-template-columns:1fr;
   }
-  .apoie-bloco{
-    max-width:100%;
-  }
-  .apoie-cards{
-    grid-template-columns: repeat(2,minmax(0,1fr));
-  }
-  .apoie-beneficios__grid{
+  .apoie-porque__grid{
     grid-template-columns:1fr;
   }
 }
 
-@media (max-width: 720px){
+@media (max-width:768px){
   .apoie-hero{
-    padding:28px 0 24px;
+    padding-top:40px;
   }
-  .apoie-hero__highlights{
+
+  .apoie-hero h1{
+    font-size:2rem;
+  }
+
+  .apoie-metricas{
+    gap:18px;
+  }
+
+  .contato-box{
+    padding:24px 18px 26px;
+  }
+}
+
+@media (max-width:640px){
+  .apoie-btns{
     flex-direction:column;
+    align-items:flex-start;
   }
-  .apoie-cards{
-    grid-template-columns:1fr;
-  }
-  .apoie-contato__card{
-    padding:18px 16px;
+
+  .apoie-btn{
+    width:100%;
+    justify-content:center;
   }
 }
